@@ -1,0 +1,18 @@
+---
+# tasks file for apache
+- name: instalamos paquetes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ apache_packages }}"  
+
+- name: levantamos servicio
+  service:
+    name: "{{ apache service }}"
+    state: started
+    enabled: yes
+
+- name: cree pagina de bienvenida
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html

@@ -1,0 +1,6 @@
+---
+- hosts: "{{ servidores }}"
+  become: true
+  roles:
+  - apache
+  

@@ -1,0 +1,17 @@
+---
+- hosts: "{{ servidores }}"
+  vars:
+    empleados:
+      - nombre: pedro
+        wiw: 10
+        grupo: test
+      - nombre: marc
+        wiw: 11
+        grupo: dev
+  tasks:
+  - name: motraremos contenido de la variable
+    debug:
+      msg:
+      - "todo: {{ empleados }}"
+      - "marc wiw: {{ empleados[1].wiw }}"
+      - "marc grupo: {{ empleados[1].grupo }}"

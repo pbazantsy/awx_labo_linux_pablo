@@ -1,0 +1,30 @@
+---
+- hosts: linux04
+  become: true
+  serial:
+  - 1
+  - 2
+  - 50%
+  max_fail_percentage: 5
+  tasks:
+  - name: instalamos apache
+    package:
+      name: httpd
+      state: present
+  - name: iniciamos httpd y lo dejamos persistente en el reboot
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+  - name: creamos pagina de bienvenida
+    copy:
+      dest: /var/www/html/index.html
+      content: |
+        <html>
+        <body>
+        <h1>It works!</h1>
+        Que bonito!
+        Que bueno!
+        Que bueno"
+        </body>
+        </html>

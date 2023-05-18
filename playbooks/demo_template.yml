@@ -1,0 +1,14 @@
+---
+- hosts: "{{ servidores }}"
+  become: true
+  tasks:
+    - name: copiamos fichero de config
+      copy:
+        src: /tools/git_repositories/ansible_pabazan/awx_labo_linux_pablo/test.conf
+        dest: "/var/tmp/test.conf"
+        owner: root
+        group: root
+        mode: '0644'
+        
+
+
