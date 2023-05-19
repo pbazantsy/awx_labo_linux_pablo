@@ -1,12 +1,37 @@
 ---
 - hosts: "{{ servidores }}"
+  gather_facts: false
   become: true
   tasks:
+  - name: mostrar contenido de variable usuario
+    debug:
+      var: usuario
   - name: crear usuario
     user:
-      name: "{{ item.empleado }}"
-      groups: "{{ item.equipo }}"
+      name: "{{ usuario }}"
+      groups: "{{ grupo }}"
       shell: "/bin/bash"
-      comment: "usuario creado por ansible"
+      comment: "usuario creado"
       state: present
-    with_items: "{{ usuarios }}"
+    register: output
+  - name: mostrar contenido de output
+    debug:
+      var: output.group, output.home
+      # msg:
+      # - "{{ output.group }}"
+      # - "{{ output.home }}"
+    # with_items: "{{ usuarios }}"
+    # when: is_usuario | bool
+
+# ---
+# - hosts: "{{ servidores }}"
+#   become: true
+#   tasks:
+#   - name: crear usuario
+#     user:
+#       name: "{{ item.empleado }}"
+#       groups: "{{ item.equipo }}"
+#       shell: "/bin/bash"
+#       comment: "usuario creado por ansible"
+#       state: present
+#     with_items: "{{ usuarios }}"
