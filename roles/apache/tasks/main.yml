@@ -8,7 +8,7 @@
 
 - name: levantamos servicio
   service:
-    name: "{{ apache service }}"
+    name: "{{ apache_service }}"
     state: started
     enabled: yes
 
@@ -16,3 +16,8 @@
   copy:
     src: index.html
     dest: /var/www/html/index.html
+
+- name: copiamos template
+  template:
+    src: test.j2
+    dest: /var/tmp/test.txt
