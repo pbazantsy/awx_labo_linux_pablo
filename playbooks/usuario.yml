@@ -5,7 +5,7 @@
   tasks:
   - name: mostrar contenido de variable usuario
     debug:
-      var: usuario
+      msg: "HOLA"
   - name: crear usuario
     user:
       name: "{{ usuario }}"
